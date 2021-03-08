@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Projects } from "./Projects";
 
 @Entity("navers")
 export class Navers {
@@ -12,6 +13,10 @@ export class Navers {
 
     @Column()
     job_role: string;
+
+    @ManyToMany(type => Projects)
+    @JoinTable()
+    projects: Projects;
 
     @CreateDateColumn()
     birthdate: Date;
