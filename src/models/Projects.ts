@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Navers } from "./Navers";
+
 
 @Entity("projects")
 export class Projects {
@@ -14,6 +16,9 @@ export class Projects {
 
     @CreateDateColumn()
     updated_at: Date;
+
+    @ManyToMany(() => Navers, navers => navers.projects)
+    navers: Navers[];
 
     constructor() {
         if (!this.id) {

@@ -1,15 +1,20 @@
 import { Router } from 'express';
-import { SurveysController } from './controllers/SurveysController';
-import { UserController } from './controllers/UserController';
+import { NaversController } from './controllers/NaversController';
+import { ProjectsController } from './controllers/ProjectsController';
 
 const router = Router();
 
-const userController = new UserController();
-const surveysController = new SurveysController();
+const projectsController = new ProjectsController();
+const naversController = new NaversController();
 
 
-router.post('/users', userController.create);
-router.post('/surveys', surveysController.create)
-router.get('/surveys', surveysController.show)
+router.post('/navers', naversController.store);
+router.get('/navers', naversController.index);
+router.get('/navers/:id', naversController.indexId);
+router.put('/navers/:id', naversController.update);
+router.delete('/navers/:id', naversController.deleteId);
+router.post('/projects', projectsController.store);
+router.get('/projects', projectsController.index);
+
 
 export { router };
