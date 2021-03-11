@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import { getCustomRepository, Timestamp } from 'typeorm';
+import { getConnection, getCustomRepository, getRepository } from 'typeorm';
 import { NaversRepository } from '../repositories/NaversRepository';
 
 class NaversController {
-    async store(req: Request, res: Response) {
+    async store(req: Request, res: Response) { // adicionar um novo Naver
         try {
 
             const { name, job_role, birthdate, admission_date, projects } = req.body;
@@ -17,16 +17,16 @@ class NaversController {
                 admission_date,
                 projects
             });
-
             await naversRepository.save(navers);
 
             return res.status(201).json(navers);
+
         } catch (err) {
             console.log("err.message :>> ", err.message);
         }
 
     }
-    async update(req: Request, res: Response) {
+    async update(req: Request, res: Response) {// atualizar informação sobre um naver
         try {
 
             const { name, job_role, birthdate, admission_date } = req.body;
@@ -48,7 +48,7 @@ class NaversController {
 
     }
 
-    async index(req: Request, res: Response) {
+    async index(req: Request, res: Response) { // mostrar todos os navers
         try {
 
             const naversRepository = getCustomRepository(NaversRepository);
@@ -62,7 +62,7 @@ class NaversController {
         }
 
     }
-    async indexId(req: Request, res: Response) {
+    async indexId(req: Request, res: Response) { // mostrar irformações sobre um unico naver, buscando por id
         try {
 
             const { id } = req.params
@@ -78,7 +78,7 @@ class NaversController {
 
     }
 
-    async deleteId(req: Request, res: Response) {
+    async deleteId(req: Request, res: Response) {// deleta um naver do banco pelo id
         try {
             const { id } = req.params
 
@@ -94,3 +94,5 @@ class NaversController {
 }
 
 export { NaversController };
+
+

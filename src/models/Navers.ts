@@ -16,7 +16,9 @@ export class Navers {
     job_role: string;
 
     @ManyToMany(() => Projects, projects => projects.navers, {
-        cascade: true
+        cascade: true,
+        eager: true,
+        createForeignKeyConstraints: false
     })
     @JoinTable()
     projects: Projects[];
